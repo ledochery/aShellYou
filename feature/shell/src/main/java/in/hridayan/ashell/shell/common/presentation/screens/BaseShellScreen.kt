@@ -725,7 +725,49 @@ fun BaseShellScreen(
         }
     }
 }
-
+// --- HIZLI WI-FI KOMUT BUTONLARI ---
+        androidx.compose.foundation.layout.Column(
+            modifier = androidx.compose.ui.Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp, vertical = 6.dp),
+            verticalArrangement = androidx.compose.foundation.layout.Arrangement.spacedBy(8.dp)
+        ) {
+            androidx.compose.foundation.layout.Row(
+                modifier = androidx.compose.ui.Modifier.fillMaxWidth(),
+                horizontalArrangement = androidx.compose.foundation.layout.Arrangement.spacedBy(8.dp)
+            ) {
+                androidx.compose.material3.Button(
+                    modifier = androidx.compose.ui.Modifier.weight(1f),
+                    onClick = { viewModel.executeCommand("svc wifi enable") }
+                ) {
+                    androidx.compose.material3.Text("Wi-Fi Aç")
+                }
+                androidx.compose.material3.Button(
+                    modifier = androidx.compose.ui.Modifier.weight(1f),
+                    onClick = { viewModel.executeCommand("svc wifi disable") }
+                ) {
+                    androidx.compose.material3.Text("Wi-Fi Kapat")
+                }
+            }
+            androidx.compose.foundation.layout.Row(
+                modifier = androidx.compose.ui.Modifier.fillMaxWidth(),
+                horizontalArrangement = androidx.compose.foundation.layout.Arrangement.spacedBy(8.dp)
+            ) {
+                androidx.compose.material3.Button(
+                    modifier = androidx.compose.ui.Modifier.weight(1f),
+                    onClick = { viewModel.executeCommand("settings put global wifi_on 1") }
+                ) {
+                    androidx.compose.material3.Text("Global Aç")
+                }
+                androidx.compose.material3.Button(
+                    modifier = androidx.compose.ui.Modifier.weight(1f),
+                    onClick = { viewModel.executeCommand("settings put global wifi_scan_always_enabled 1") }
+                ) {
+                    androidx.compose.material3.Text("Tarama Aç")
+                }
+            }
+        }
+        // ------------------------------------
     when (dialogManager.activeDialog) {
         ShellDialogKey.ClearOutput -> ClearOutputConfirmationDialog(
             onDismiss = { dialogManager.dismiss() },
